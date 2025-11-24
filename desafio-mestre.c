@@ -38,10 +38,13 @@ void to_lower_case(char *string) {
 
 // Limpa o buffer de entrada (necessário após scanf de números)
 void limpar_buffer() {
-    while (getchar() != '\n' && getchar() != EOF); 
+    int c;
+    // Otimização: A sua limpeza de buffer original estava chamando getchar duas vezes, o que pode pular input.
+    // Esta versão é mais segura.
+    while ((c = getchar()) != '\n' && c != EOF); 
 }
 
-// === FUNCIONALIDADES DO INVENTÁRIO (ATUALIZADAS) ===
+// === FUNCIONALIDADES DO INVENTÁRIO ===
 
 void adicionar_item() {
     if (num_itens >= CAPACIDADE_MAXIMA) {
@@ -66,7 +69,7 @@ void adicionar_item() {
         limpar_buffer();
         return; 
     }
-    limpar_buffer(); // CORREÇÃO DO PONTO E VÍRGULA
+    limpar_buffer(); 
     
     printf("Prioridade (1 a 5, sendo 5 a maior): ");
     if (scanf("%d", &mochila[num_itens].prioridade) != 1 || mochila[num_itens].prioridade < 1 || mochila[num_itens].prioridade > 5) {
@@ -81,27 +84,37 @@ void adicionar_item() {
     printf("✅ Item '%s' adicionado. Estado de ordenação resetado.\n", mochila[num_itens - 1].nome);
 }
 
+// =======================================================================
+// === FUNÇÃO LISTAR ITENS CORRIGIDA (Formato Compacto) ===
+// =======================================================================
 void listar_itens() {
     if (num_itens == 0) {
         printf("\n🎒 Mochila Vazia. Nenhum item cadastrado.\n");
         return;
     }
 
-    printf("\n=======================================================================\n");
-    printf("| %-3s | %-20s | %-15s | %10s | %10s |\n", 
+    // A linha separadora tem exatamente 71 caracteres
+    printf("\n=======================================================================\n"); 
+    
+    // CABEÇALHO CORRIGIDO: Formato compacto |%...| 
+    printf("|%3s|%-20s|%-15s|%10s|%10s|\n", 
            "#", "Nome do Item", "Tipo", "Quantidade", "Prioridade");
+           
     printf("=======================================================================\n");
 
     for (int i = 0; i < num_itens; i++) {
-        printf("| %3d | %-20s | %-15s | %10d | %10d |\n",
+        // DADOS CORRIGIDOS: Formato compacto |%...|
+        printf("|%3d|%-20s|%-15s|%10d|%10d|\n",
                i + 1,
                mochila[i].nome,
                mochila[i].tipo,
                mochila[i].quantidade,
                mochila[i].prioridade);
     }
-    printf("=========================================================================\n");
+    // LINHA SEPARADORA FINAL CORRIGIDA (71 caracteres)
+    printf("=======================================================================\n"); 
 }
+// =======================================================================
 
 void remover_item() {
     if (num_itens == 0) {
@@ -215,7 +228,7 @@ void busca_binaria_por_nome() {
     // Validação de pré-requisito
     if (!is_ordenado_por_nome) {
         printf("\n🛑 ERRO MESTRE: A Busca Binária requer que a lista esteja **ordenada por NOME**.\n");
-        printf("Por favor, ordene a mochila pelo critério Nome (opção 5 -> 1) primeiro.\n");
+        printf("Por favor, ordene a mochila pelo critério Nome (opção 4 -> 1) primeiro.\n"); // ATUALIZADO
         return;
     }
 
@@ -264,53 +277,6 @@ void busca_binaria_por_nome() {
     }
 }
 
-// === NOVO: IMPLEMENTAÇÃO DA BUSCA SEQUENCIAL ===
-
-void buscar_item_sequencial_por_nome() {
-    if (num_itens == 0) {
-        printf("\n🎒 Mochila Vazia. Nada para buscar.\n");
-        return;
-    }
-
-    char nome_busca[50];
-    printf("\n--- Busca Sequencial por Nome ---\n");
-    limpar_buffer(); 
-
-    printf("Digite o NOME do item para busca sequencial: ");
-    fgets(nome_busca, sizeof(nome_busca), stdin);
-    nome_busca[strcspn(nome_busca, "\n")] = 0;
-    to_lower_case(nome_busca);
-
-    int indice_encontrado = -1;
-    char temp_nome[50];
-    int comparacoes_seq = 0;
-
-    // Início da Busca Sequencial
-    for (int i = 0; i < num_itens; i++) {
-        comparacoes_seq++;
-        strcpy(temp_nome, mochila[i].nome);
-        to_lower_case(temp_nome);
-        
-        if (strcmp(temp_nome, nome_busca) == 0) {
-            indice_encontrado = i;
-            break; // Item encontrado, encerra o loop
-        }
-    }
-
-    if (indice_encontrado != -1) {
-        printf("\n✅ Item encontrado (Busca Sequencial):\n");
-        printf("Nome: %s\n", mochila[indice_encontrado].nome);
-        printf("Tipo: %s\n", mochila[indice_encontrado].tipo);
-        printf("Quantidade: %d\n", mochila[indice_encontrado].quantidade);
-        printf("Prioridade: %d\n", mochila[indice_encontrado].prioridade);
-        printf("📊 Total de Comparações: %d\n", comparacoes_seq);
-    } else {
-        printf("\n❌ Item '%s' não encontrado.\n", nome_busca);
-        printf("📊 Total de Comparações (Percorreu tudo): %d\n", comparacoes_seq);
-    }
-}
-
-
 // === MENUS ===
 
 void menu_ordenacao() {
@@ -345,17 +311,16 @@ int main() {
         printf("\n PLANO DE FUGA - CÓDIGO DA ILHA (NÍVEL MESTRE) \n");
         printf("================================================\n");
         
-        // CORREÇÃO DO STATUS DA MOCHILA
+    
         printf("🎒 Itens na Mochila: %d/%d\n", num_itens, CAPACIDADE_MAXIMA); 
         
         printf("Status de Ordenação por Nome: %s\n", is_ordenado_por_nome ? "✅ ORDENADO" : "❌ NÃO ORDENADO\n");
-      
+        
         printf("1. Adicionar Componente \n");
         printf("2. Descartar Componente\n");
         printf("3. Listar Componentes (Inventario) \n");
-        printf("4. Busca Sequencial (por Nome)\n"); // NOVO TEXTO
-        printf("5. Organizar Mochila (Ordenar Componentes) \n"); 
-        printf("6. Busca Binária por Componente-Chave (por nome)\n");
+        printf("4. Organizar Mochila (Ordenar Componentes) \n"); 
+        printf("5. Busca Binária por Componente-Chave (por nome)\n"); 
         printf("0. ATIVAR TORRE DE FUGA (Sair)\n");
         printf("------------------------------------------------\n");
                 
@@ -378,13 +343,10 @@ int main() {
             case 3:
                 listar_itens();
                 break;
-            case 4:
-                buscar_item_sequencial_por_nome(); // CHAMADA CORRETA
-                break;
-            case 5:
+            case 4: // NOVO CASE 4 (Antigo 5)
                 menu_ordenacao(); 
                 break;
-            case 6:
+            case 5: // NOVO CASE 5 (Antigo 6)
                 busca_binaria_por_nome();
                 break;
             case 0:
