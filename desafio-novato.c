@@ -50,18 +50,19 @@ void listar_itens() {
         return;
     }
 
-    printf("\n=======================================================\n");
-    printf("| # | Nome do Item | Tipo | Quantidade |\n");
-    printf("=======================================================\n");
+    printf("\n====================================================================\n");
+    printf("|%3s|%-25s|%-15s|%10s|\n", 
+           "#", "Nome do Item", "Tipo", "Quantidade");
+    printf("====================================================================\n");
 
     for (int i = 0; i < num_itens; i++) {
-        printf("| %-1d | %-20s | %-15s | %-10d |\n",
+        printf("|%3d|%-25s|%-15s|%10d|\n",
                i + 1,
                mochila[i].nome,
                mochila[i].tipo,
                mochila[i].quantidade);
     }
-    printf("=======================================================\n");
+    printf("====================================================================\n");
 }
 
 // 6. Implementação da funcionalidade de Remover Item
@@ -107,8 +108,12 @@ int main() {
 
     do {
         // Exibe o Menu
-        printf("\n\n=== MOCHILA SOBREVIVENVIA - CÓDIGO DA ILHA ===\n");
-        printf("1. Adicionar Item\n");
+        printf("===========================================\n");
+        printf(" MOCHILA DE SOBREVIVENVIA - CÓDIGO DA ILHA ");
+        printf("\n===========================================\n");
+        printf("🎒 Itens na Mochila: %d/%d\n", num_itens, CAPACIDADE_MAXIMA);
+
+        printf("\n1. Adicionar Item\n");
         printf("2. Remover Item\n");
         printf("3. Listar Itens\n");
         printf("0. Sair\n");
