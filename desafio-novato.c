@@ -27,7 +27,7 @@ void adicionar_item() {
     fgets(mochila[num_itens].nome, sizeof(mochila[num_itens].nome), stdin);
     mochila[num_itens].nome[strcspn(mochila[num_itens].nome, "\n")] = 0;
 
-    printf("Tipo do Item (ex: Cura, Munição): ");
+    printf("Tipo do Item (ex:Arma, Cura, Munição, etc): ");
     fgets(mochila[num_itens].tipo, sizeof(mochila[num_itens].tipo), stdin);
     mochila[num_itens].tipo[strcspn(mochila[num_itens].tipo, "\n")] = 0;
 
@@ -107,7 +107,7 @@ int main() {
 
     do {
         // Exibe o Menu
-        printf("\n\n=== Desafio Código da Ilha: Mochila Virtual ===\n");
+        printf("\n\n=== MOCHILA SOBREVIVENVIA - CÓDIGO DA ILHA ===\n");
         printf("1. Adicionar Item\n");
         printf("2. Remover Item\n");
         printf("3. Listar Itens\n");
