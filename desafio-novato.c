@@ -109,7 +109,7 @@ int main() {
     do {
         // Exibe o Menu
         printf("===========================================\n");
-        printf(" MOCHILA DE SOBREVIVENVIA - CÓDIGO DA ILHA ");
+        printf(" MOCHILA DE SOBREVIVÊNCIA - CÓDIGO DA ILHA ");
         printf("\n===========================================\n");
         printf("🎒 Itens na Mochila: %d/%d\n", num_itens, CAPACIDADE_MAXIMA);
 
