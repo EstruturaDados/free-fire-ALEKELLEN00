@@ -85,7 +85,7 @@ void adicionar_item() {
 }
 
 // =======================================================================
-// === FUNÇÃO LISTAR ITENS CORRIGIDA (Formato Compacto) ===
+// === FUNÇÃO LISTAR ITENS  (Formato Compacto) ===
 // =======================================================================
 void listar_itens() {
     if (num_itens == 0) {
@@ -96,14 +96,14 @@ void listar_itens() {
     // A linha separadora tem exatamente 71 caracteres
     printf("\n=======================================================================\n"); 
     
-    // CABEÇALHO CORRIGIDO: Formato compacto |%...| 
+    // CABEÇALHO : Formato compacto |%...| 
     printf("|%3s|%-20s|%-15s|%10s|%10s|\n", 
            "#", "Nome do Item", "Tipo", "Quantidade", "Prioridade");
            
     printf("=======================================================================\n");
 
     for (int i = 0; i < num_itens; i++) {
-        // DADOS CORRIGIDOS: Formato compacto |%...|
+        // DADOS : Formato compacto |%...|
         printf("|%3d|%-20s|%-15s|%10d|%10d|\n",
                i + 1,
                mochila[i].nome,
@@ -111,7 +111,7 @@ void listar_itens() {
                mochila[i].quantidade,
                mochila[i].prioridade);
     }
-    // LINHA SEPARADORA FINAL CORRIGIDA (71 caracteres)
+    // LINHA SEPARADORA FINAL (71 caracteres)
     printf("=======================================================================\n"); 
 }
 // =======================================================================
