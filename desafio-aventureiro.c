@@ -48,11 +48,12 @@ void listar_itens() {
     }
 
     printf("\n=======================================================\n");
-    printf("| # | Nome do Item | Tipo | Quantidade |\n");
+    printf("| %3s|%-20s|%-15s|%10s|\n", 
+           "#", "Nome do Item", "Tipo", "Quantidade");
     printf("=======================================================\n");
 
     for (int i = 0; i < num_itens; i++) {
-        printf("| %-1d | %-20s | %-15s | %-10d |\n",
+        printf("|%3d|%-20s|%-15s|%10d|\n",
                i + 1,
                mochila[i].nome,
                mochila[i].tipo,
@@ -136,13 +137,17 @@ void buscar_item() {
 }
 
 
-// 3. Função Principal e Menu Interativo Atualizado
+// 3. Função Principal e Menu Interativo 
 int main() {
     int opcao;
 
     do {
-        printf("\n\n=== Desafio Código da Ilha: Nível Aventureiro ===\n");
-        printf("1. Adicionar Item\n");
+        printf("========================================\n");
+        printf(" MOCHILA SOBREVIVENCIA - CODIGO ILHA ");
+        printf("\n========================================\n");
+        printf("🎒 Itens na Mochila: %d/%d\n", num_itens, CAPACIDADE_MAXIMA);
+
+        printf("\n1. Adicionar Item\n");
         printf("2. Remover Item\n");
         printf("3. Listar Itens\n");
         printf("4. Buscar Item por Nome\n");
