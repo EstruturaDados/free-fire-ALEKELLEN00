@@ -13,7 +13,7 @@ typedef struct {
 Item mochila[CAPACIDADE_MAXIMA];
 int num_itens = 0;
 
-// 4. Implementação da funcionalidade de Adicionar Item
+// 3. Implementação da funcionalidade de Adicionar Item
 void adicionar_item() {
     if (num_itens >= CAPACIDADE_MAXIMA) {
         printf("\n🚫 Mochila Cheia! Não é possível adicionar mais itens.\n");
@@ -43,7 +43,7 @@ void adicionar_item() {
     printf("✅ Item '%s' adicionado com sucesso!\n", mochila[num_itens - 1].nome);
 }
 
-// 5. Implementação da funcionalidade de Listar Itens
+// 4. Implementação da funcionalidade de Listar Itens
 void listar_itens() {
     if (num_itens == 0) {
         printf("\n🎒 Mochila Vazia. Nenhum item cadastrado.\n");
@@ -65,7 +65,7 @@ void listar_itens() {
     printf("====================================================================\n");
 }
 
-// 6. Implementação da funcionalidade de Remover Item
+// 5. Implementação da funcionalidade de Remover Item
 void remover_item() {
     if (num_itens == 0) {
         printf("\n🎒 Mochila Vazia. Nada para remover.\n");
@@ -102,7 +102,7 @@ void remover_item() {
     }
 }
 
-// 3. Função Principal e Menu Interativo
+// 6. Função Principal e Menu Interativo
 int main() {
     int opcao;
 
