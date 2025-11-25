@@ -32,7 +32,7 @@ void adicionar_item() {
     mochila[num_itens].tipo[strcspn(mochila[num_itens].tipo, "\n")] = 0;
 
     printf("Quantidade: ");
-    // Note: Usamos scanf aqui porque esperamos apenas um inteiro
+    //  Usamos scanf aqui porque esperamos apenas um inteiro
     if (scanf("%d", &mochila[num_itens].quantidade) != 1 || mochila[num_itens].quantidade < 0) {
         printf("⚠️ Quantidade inválida. Item não adicionado.\n");
         while (getchar() != '\n'); // Limpa o buffer
